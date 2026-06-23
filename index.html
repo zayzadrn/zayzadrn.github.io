@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osman Zadran — Developer</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:       #0a0a0f;
+            --surface:  #12121a;
+            --border:   #1e1e2e;
+            --accent:   #6366f1;
+            --accent2:  #a855f7;
+            --green:    #22c55e;
+            --text:     #e2e8f0;
+            --muted:    #64748b;
+            --faint:    #1a1a2e;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* GRID BACKGROUND */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 48px;
+            height: 56px;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(99,102,241,0.08);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 32px 80px;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+            50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0.05); }
+        }
+
+        .status-text {
+            font-size: 12px;
+            color: var(--green);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .name { color: var(--text); }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 18px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 13px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            transition: all 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-main:hover {
+            background: #4f52d9;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 13px 26px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            border-color: var(--muted);
+        }
+
+        /* SECTION */
+        .section {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px 80px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .section-heading h2 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .section-heading::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* PROJECT CARDS */
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: rgba(99,102,241,0.3);
+            box-shadow: 0 0 40px rgba(99,102,241,0.08);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .project-meta {}
+
+        .project-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .tag-live {
+            background: rgba(34,197,94,0.12);
+            color: var(--green);
+            border: 1px solid rgba(34,197,94,0.2);
+        }
+
+        .tag-first {
+            background: rgba(168,85,247,0.12);
+            color: #c084fc;
+            border: 1px solid rgba(168,85,247,0.2);
+        }
+
+        .project-name {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: 0.02em;
+            transition: all 0.2s;
+        }
+
+        .action-code {
+            background: var(--faint);
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .action-code:hover {
+            color: var(--text);
+            border-color: var(--muted);
+        }
+
+        .action-live {
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+        }
+
+        .action-live:hover {
+            background: #4f52d9;
+            box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+        }
+
+        .project-desc {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+
+        .project-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .chip {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            background: var(--faint);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 12px;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stack-item {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .skill-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .skill-item:hover { border-color: rgba(99,102,241,0.4); }
+
+        .skill-icon { font-size: 20px; flex-shrink: 0; }
+
+        .skill-info {}
+
+        .skill-name {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .skill-sub {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* FOOTER */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 12px;
+            color: var(--muted);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            nav { padding: 0 20px; }
+            .hero { padding: 60px 20px 60px; }
+            .section { padding: 0 20px 60px; }
+            .project-top { flex-direction: column; }
+            .project-actions { width: 100%; }
+            .action-btn { flex: 1; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="nav-logo">oz<span>.</span>dev</a>
+    <div class="nav-links">
+        <a href="https://github.com/zayzadrn" target="_blank">GitHub</a>
+        <a href="https://cv-tailor-production-e361.up.railway.app" target="_blank">CVTailor ↗</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-eyebrow">
+        <div class="status-dot"></div>
+        <span class="status-text">Open to opportunities</span>
+    </div>
+    <h1>
+        <span class="name">Osman Zadran.<br></span>
+        <span class="gradient">Python Developer.</span>
+    </h1>
+    <p class="hero-desc">
+        Self-taught developer building real web apps with Python and Flask. I go from idea to deployed product — including AI integration, auth, databases, and production deployment.
+    </p>
+    <div class="hero-cta">
+        <a href="https://github.com/zayzadrn" target="_blank" class="btn-main">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            github.com/zayzadrn
+        </a>
+        <a href="mailto:your@email.com" class="btn-ghost">
+            Get in touch →
+        </a>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-heading">
+        <h2>// Projects</h2>
+    </div>
+
+    <!-- CVTailor -->
+    <div class="project-card">
+        <div class="project-top">
+            <div class="project-meta">
+                <div class="project-tag tag-live">● Live in production</div>
+                <div class="project-name">CVTailor</div>
+            </div>
+            <div class="project-actions">
+                <a href="https://github.com/zayzadrn/cv-tailor" target="_blank" class="action-btn action-code">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Code
+                </a>
+                <a href="https://cv-tailor-production-e361.up.railway.app" target="_blank" class="action-btn action-live">
+                    Live app ↗
+                </a>
+            </div>
+        </div>
+
+        <p class="project-desc">
+            AI-powered CV and job-match analysis tool. Upload a CV and job description to get an instant match score, skills gap analysis, rewritten bullet points, ATS keywords, a LinkedIn summary, and a tailored cover letter — generated by Claude AI in under 30 seconds. Built with full user authentication, Google OAuth, email verification, analysis history, and rate limiting.
+        </p>
+
+        <div class="project-chips">
+            <span class="chip">Match scoring</span>
+            <span class="chip">Skills gap analysis</span>
+            <span class="chip">CV bullet rewrites</span>
+            <span class="chip">ATS keywords</span>
+            <span class="chip">Cover letter generator</span>
+            <span class="chip">Google OAuth</span>
+            <span class="chip">Email verification</span>
+            <span class="chip">Analysis history</span>
+            <span class="chip">PDF export</span>
+            <span class="chip">Rate limiting</span>
+        </div>
+
+        <div class="project-stack">
+            <span class="stack-item">Python</span>
+            <span class="stack-item">Flask</span>
+            <span class="stack-item">Anthropic API</span>
+            <span class="stack-item">SQLite</span>
+            <span class="stack-item">SQLAlchemy</span>
+            <span class="stack-item">Authlib</span>
+            <span class="stack-item">Resend</span>
+            <span class="stack-item">Railway</span>
+            <span class="stack-item">PyMuPDF</span>
+        </div>
+    </div>
+
+    <!-- Notes Manager -->
+    <div class="project-card">
+        <div class="project-top">
+            <div class="project-meta">
+                <div class="project-tag tag-first">★ First project · Harvard CS50P</div>
+                <div class="project-name">Notes Manager</div>
+            </div>
+            <div class="project-actions">
+                <a href="https://github.com/zayzadrn/notes-manager-webapp" target="_blank" class="action-btn action-live">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+
+        <p class="project-desc">
+            A Flask web app for creating and organising notes with a tag-based system. My first complete web application, built as a Harvard CS50P final project. Notes are stored in CSV, rendered with Jinja2 templates, and fully searchable by keyword or tag — demonstrating clean Python fundamentals and web development basics from scratch.
+        </p>
+
+        <div class="project-chips">
+            <span class="chip">Create & edit notes</span>
+            <span class="chip">Tag system</span>
+            <span class="chip">Keyword search</span>
+            <span class="chip">Filter by tag</span>
+            <span class="chip">Statistics view</span>
+        </div>
+
+        <div class="project-stack">
+            <span class="stack-item">Python</span>
+            <span class="stack-item">Flask</span>
+            <span class="stack-item">Jinja2</span>
+            <span class="stack-item">HTML & CSS</span>
+            <span class="stack-item">CSV storage</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="section">
+    <div class="section-heading">
+        <h2>// Stack</h2>
+    </div>
+    <div class="skills-grid">
+        <div class="skill-item">
+            <div class="skill-icon">🐍</div>
+            <div class="skill-info">
+                <div class="skill-name">Python</div>
+                <div class="skill-sub">Primary language</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">🌶️</div>
+            <div class="skill-info">
+                <div class="skill-name">Flask</div>
+                <div class="skill-sub">Web framework</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">🤖</div>
+            <div class="skill-info">
+                <div class="skill-name">Claude AI</div>
+                <div class="skill-sub">Anthropic API</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">🗄️</div>
+            <div class="skill-info">
+                <div class="skill-name">SQLite</div>
+                <div class="skill-sub">SQLAlchemy ORM</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">🔐</div>
+            <div class="skill-info">
+                <div class="skill-name">OAuth</div>
+                <div class="skill-sub">Google, Authlib</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">🚀</div>
+            <div class="skill-info">
+                <div class="skill-name">Railway</div>
+                <div class="skill-sub">Deployment</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">🌐</div>
+            <div class="skill-info">
+                <div class="skill-name">HTML & CSS</div>
+                <div class="skill-sub">Frontend</div>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-icon">⚡</div>
+            <div class="skill-info">
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-sub">Vanilla JS</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Osman Zadran &nbsp;·&nbsp; <a href="https://github.com/zayzadrn" target="_blank">github.com/zayzadrn</a> &nbsp;·&nbsp; Built from scratch</p>
+</footer>
+
+</body>
+</html>
